@@ -1,0 +1,21 @@
+#proxy {
+  margin: auto;
+}
+
+#container {
+  display: grid;
+  grid-template-columns: 1fr 500px;
+}
+
+#listingDetails {
+  grid-column: 1;
+}
+
+#reviews {
+  grid-column: 1;
+}
+
+#bookings {
+  grid-column: 2;
+  align-self: start;
+}
