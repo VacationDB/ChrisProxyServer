@@ -12,15 +12,15 @@ const loadBundle = function(cache, item, filename) {
 };
 
 const fetchBundles = (path, services, suffix = '', require = false) => {
-  Object.keys(services).forEach(item => {
-    const filename = `${path}/${item}${suffix}.js`;
+  Object.keys(services).forEach(service => {
+    const filename = `${path}/${service}${suffix}.js`;
     exists(filename)
       .then(() => {
-        require ? loadBundle(services, item, filename) : null;
+        require ? loadBundle(services, service, filename) : null;
       })
       .catch(err => {
         if (err.code === 'ENOENT') {
-          const url = `${services[item]}${suffix}.js`;
+          const url = `${services[service]}${suffix}.js`;
           console.log(`Fetching: ${url}`);
           // see: https://www.npmjs.com/package/node-fetch
           fetch(url)
@@ -28,7 +28,7 @@ const fetchBundles = (path, services, suffix = '', require = false) => {
               const dest = fs.createWriteStream(filename);
               res.body.pipe(dest);
               res.body.on('end', () => {
-                require ? loadBundle(services, item, filename) : null;
+                require ? loadBundle(services, service, filename) : null;
               });
             });
         } else {
@@ -37,7 +37,7 @@ const fetchBundles = (path, services, suffix = '', require = false) => {
       });
   });
 };
-
+//services is service config json which is jsut path to s3 bundle
 module.exports = (clientPath, serverPath, services) => {
   fetchBundles(clientPath, services);
   fetchBundles(serverPath, services, '-server', true);

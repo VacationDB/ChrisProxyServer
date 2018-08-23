@@ -1,7 +1,5 @@
 const express = require('express');
 const proxy = require('http-proxy-middleware');
-const React = require("react");
-const ReactDom = require('react-dom/server');
 
 const app = express();
 
@@ -10,51 +8,6 @@ const app = express();
 // const Scripts = require('./templates/scripts');
 
 // see: https://medium.com/styled-components/the-simple-guide-to-server-side-rendering-react-with-styled-components-d31c6b2b8fbf
-const Scripts = () => `
-  <script src="/lib/react.development.js"></script>
-  <script src="/lib/react-dom.development.js"></script>
-
-  <script src="/bundle.js"></script>
-
-  <script>
-      ReactDOM.hydrate(
-        React.createElement(< Navigation />),
-        document.getElementById('navigation')
-      );
-  </script>
-`;
-const Layout = (body, scripts) => `
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="/style.css">
-    <title>Proxy</title>
-  </head>
-  <body>
-  ${body}
-  </body>
-  ${scripts}
-</html>
-`;
-const App = (navigation) => `
-<div id="navigation">${navigation}</div>
-`;
-
-
-// const renderComponents = (components, props = {}) => {
-//   return Object.keys(components).map(item => {
-//     let component = React.createElement(components[item], props);
-//     return ReactDom.renderToString(component);
-//   });
-// };
-
-app.get('/search/:listingId', function(req, res) {
-  let component = ReactDom.renderToString('./bundle.js')
-  res.end(Layout( App (component),
-    Scripts()
-  ));
-});
 
 app.use((req, res, next) =>{
   res.setHeader('Access-Control-Allow-Headers', '*');
