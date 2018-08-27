@@ -3,47 +3,47 @@ const fetch = require('node-fetch');
 const Promise = require('bluebird');
 const exists = Promise.promisify(fs.stat);
 
-const loadBundle = function(cache, item, filename) {
+const loadBundle = (services, item, filename) => {
   // add a small delay to ensure pipe has closed
   setTimeout(() => {
-    console.log('loading:', filename);
-    cache[item] = require(filename).default; 
-    console.log(cache, item, filename, 'cache item filename');   
+    console.log(`Loading: ${filename}`);
+    services[item] = require(filename).default;
   }, 0);
 };
 
-const fetchBundles = (path, services, suffix = '', require = false) => {
-  Object.keys(services).forEach(service => {
-    const filename = `${path}/${service}${suffix}.js`;
+const fetchBundles = ( path, services, ext = "js", suffix = "", require = false) => {
+  Object.keys(services).forEach(item => {
+    const filename = `${path}/${item}${suffix}.${ext}`;
     exists(filename)
-    .then(() => {
-      console.log(services, '= services in fetch bundle, ', service, 'service in fetchbundle')
-        require ? loadBundle(services, service, filename) : null;
+      .then(() => {
+        require ? loadBundle(services, item, filename) : null;
       })
       .catch(err => {
-        if (err.code === 'ENOENT') {
-          const url = `${services[service]}${suffix}.js`;
+        if (err.code === "ENOENT") {
+          const url = `${services[item]}${suffix}.${ext}`;
           console.log(`Fetching: ${url}`);
-          // see: https://www.npmjs.com/package/node-fetch
           fetch(url)
-            .then(res => {
+            .then(res => res.text())
+            .then(text => {
               const dest = fs.createWriteStream(filename);
-              res.body.pipe(dest);
-              res.body.on('end', () => {
-                require ? loadBundle(services, service, filename) : null;
+              dest.write(text, () => {
+                require
+                  ? loadBundle(services, item, filename)
+                  : console.log("Fetched " + url);
               });
             });
         } else {
-          console.log('WARNING: Unknown fs error');
+          console.log("WARNING: Unknown fs error");
         }
       });
   });
 };
-//services is service config json which is jsut path to s3 bundle
-module.exports = (clientPath, serverPath, services) => {
-  console.log(services)
-  fetchBundles(serverPath, services, '-server', true);
+
+module.exports = (clientPath, serverPath, serviceConfig) => {
+  const services = Object.assign({}, serviceConfig);
   fetchBundles(clientPath, services);
+  fetchBundles(clientPath, services, "css");
+  fetchBundles(serverPath, services, "js", "-server", true);
 
   return services;
 };
