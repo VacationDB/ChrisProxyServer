@@ -1,0 +1,246 @@
+.History__records___2yXOF {
+  position: absolute;
+  width: 18rem;
+  border: 1px solid lightgrey;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 10px 0px;
+  padding: 0.5rem;
+  background-color: white;
+  overflow-y: visible;
+}
+
+.History__record___1aRVs {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.History__record___1aRVs:hover {
+  color: white;
+  background-color: steelblue;
+}
+
+.History__text___2m2V9 {
+  font-weight: 600;
+}
+
+.History__time___2Cia7 {
+  font-size: 0.5rem;
+  color: lightgrey;
+}
+
+.Input__bar___1tDYY {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: fit-content;
+  height: 2rem;
+  border: 1px solid lightgrey;
+  border-radius: 0.2rem;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 10px 0px;
+  font-size: 0.8rem;
+  background-color: white;
+}
+
+.Input__field___tzfPV {
+  width: 15rem;
+  border: 0;
+  font-size: 0.9rem;
+}
+
+.Input__field___tzfPV:focus {
+  outline: 0;
+}
+
+.Input__icon___2rwju,
+.Input__cancel___1QOsf {
+  padding: 0 0.5rem;
+  cursor: default;
+}
+
+.Input__cancel___1QOsf {
+  align-self: start;
+  opacity: 0;
+  font-size: 1.5rem;
+}
+
+.Input__active___20NnD {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.Input__active___20NnD:focus {
+  outline-color: lightgrey;
+}
+
+@media (max-width: 400px) {
+  .Input__bar___1tDYY {
+    width: 80%;
+  }
+  .Input__field___tzfPV {
+    width: 72%;
+  }
+}
+
+.Landing__container___3_TDC {
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+  background-image: url("https://s3.amazonaws.com/fec-overview-service-images/landing.jpg");
+  background-position: center;
+  background-repeat: none;
+  background-size: cover;
+}
+
+.Landing__screen___18buA {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.Landing__screen___18buA > * {
+  z-index: 20;
+}
+
+.Landing__title___3JsUu {
+  margin: 2rem 0;
+  font-size: 3rem;
+  font-weight: 800;
+  color: white;
+}
+
+.Results__container___3ii4F {
+  width: 80%;
+  margin: 1em auto;
+  padding: 1rem;
+}
+
+.Results__summary___BAedf {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.Results__list___1G5b2 {
+  display: grid;
+  grid-template-columns: 24% 24% 24% 24%;
+  margin: 1rem 0 0;
+  grid-column-gap: 1%;
+}
+
+.Results__result___378xe {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: fit-content;
+  margin: 0 0 1.5rem;
+}
+
+.Results__title___3R2Pu {
+  margin: 0 0 0.25rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.Results__title___3R2Pu:hover {
+  font-weight: 800;
+  color: steelblue;
+}
+
+.Results__photo___nZxYp:focus,
+.Results__title___3R2Pu:focus {
+  outline: 0;
+}
+
+.Results__city___3oIHG {
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.Results__host___Q_I9i {
+  margin: 0.4rem 0 0;
+  font-size: 0.8rem;
+}
+
+.Results__photo___nZxYp {
+  width: 100%;
+  max-width: 360px;
+  max-height: 180px;
+  margin: 0 0 0.5rem;
+  cursor: pointer;
+}
+
+@media (max-width: 1123px) {
+  .Results__list___1G5b2 {
+    grid-template-columns: 31% 31% 31%;
+  }
+}
+
+@media (max-width: 640px) {
+  .Results__list___1G5b2 {
+    grid-template-columns: 48% 48%;
+  }
+}
+
+@media (max-width: 360px) {
+  .Results__list___1G5b2 {
+    grid-template-columns: 100%;
+  }
+}
+
+.Navbar__navbar___IWQeG {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  top: 0;
+  width: 100%;
+  height: 5rem;
+  z-index: 10;
+  border-bottom: lightgrey 2px solid;
+  background-color: white;
+}
+
+.Navbar__search___1fmnW {
+  display: flex;
+}
+
+.Navbar__logo___3AybP {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 1rem;
+  margin: 0 1rem;
+  cursor: pointer;
+}
+
+.Navbar__menu___1nkQb {
+  display: flex;
+  align-items: center;
+}
+
+.Navbar__menu___1nkQb > * {
+  margin: 0 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: not-allowed;
+}
+
+.Navbar__menu___1nkQb > img {
+  width: 2rem;
+  border-radius: 1rem;
+  margin: 0 2rem 0 1rem;
+}
+
+@media (max-width: 720px) {
+  .Navbar__menu___1nkQb {
+    display: none;
+  }
+}
+
